@@ -12,10 +12,10 @@
 import 'ds-thing/thing.sol';
 
 contract DSValue is DSThing {
-    bool    haz;
+    bool    has;
     bytes32 val;
     function peek() constant returns (bytes32, bool) {
-        return (val,haz);
+        return (val,has);
     }
     function read() constant returns (bytes32) {
         var (wut, has) = peek();
@@ -24,9 +24,9 @@ contract DSValue is DSThing {
     }
     function poke(bytes32 wut) auth {
         val = wut;
-        haz = true;
+        has = true;
     }
     function void() auth { // unset the value
-        haz = false;
+        has = false;
     }
 }
