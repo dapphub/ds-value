@@ -14,18 +14,19 @@ import 'ds-thing/thing.sol';
 contract DSValue is DSThing {
     bool    haz;
     bytes32 val;
-    function has() constant returns (bool) {
-        return haz;
+    function peek() constant returns (bytes32, bool) {
+        return (val,haz);
     }
-    function get() constant returns (bytes32) {
-        assert(has());
-        return val;
+    function read() constant returns (bytes32) {
+        var (wut, has) = peek();
+        assert(has);
+        return wut;
     }
-    function set(bytes32 wut) auth {
+    function poke(bytes32 wut) auth {
         val = wut;
         haz = true;
     }
-    function nil() auth { // unset the value
+    function void() auth { // unset the value
         haz = false;
     }
 }
