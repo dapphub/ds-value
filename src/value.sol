@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-pragma solidity ^0.4.13;
+pragma solidity ^0.4.18;
 
 import 'ds-thing/thing.sol';
 
@@ -26,7 +26,8 @@ contract DSValue is DSThing {
         return (val,has);
     }
     function read() public view returns (bytes32) {
-        var (wut, haz) = peek();
+        bytes32 wut; bool haz;
+        (wut, haz) = peek();
         assert(haz);
         return wut;
     }
