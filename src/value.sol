@@ -21,7 +21,7 @@ import 'ds-thing/thing.sol';
 
 contract DSValue is DSThing {
     bool    has;
-    bytes32 val; // ray
+    bytes32 val; // wad
     function peek() public view returns (bytes32, bool) {
         return (val,has);
     }
