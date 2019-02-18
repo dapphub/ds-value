@@ -28,7 +28,7 @@ contract DSValue is DSThing {
     function read() public view returns (bytes32) {
         bytes32 wut; bool haz;
         (wut, haz) = peek();
-        assert(haz);
+        require(haz, "haz-not");
         return wut;
     }
     function poke(bytes32 wut) public note auth {
