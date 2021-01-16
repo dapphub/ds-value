@@ -17,9 +17,11 @@
 
 pragma solidity >=0.4.23;
 
-import 'ds-thing/thing.sol';
+import 'ds-auth/auth.sol';
+import 'ds-note/note.sol';
+import 'ds-math/math.sol';
 
-contract DSValue is DSThing {
+contract DSValue is DSAuth, DSNote, DSMath {
     bool    has;
     bytes32 val;
     function peek() public view returns (bytes32, bool) {
