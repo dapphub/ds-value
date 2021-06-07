@@ -19,23 +19,35 @@ pragma solidity >=0.4.23;
 
 import 'ds-thing/thing.sol';
 
-contract DSValue is DSThing {
-    bool    has;
-    bytes32 val;
-    function peek() public view returns (bytes32, bool) {
-        return (val,has);
+contract CfgRewardRate is DSThing {
+
+    bool    hasInvestorRewardRate;
+    uint256 investorRewardRate;
+
+    bool    hasAORewardRate;
+    uint256 aoRewardRate;
+
+    function peek() public view returns (uint256, bool, uint256, bool) {
+        return (investorRewardRate, hasInvestorRewardRate, aoRewardRate, hasAORewardRate);
     }
-    function read() public view returns (bytes32) {
-        bytes32 wut; bool haz;
-        (wut, haz) = peek();
-        require(haz, "haz-not");
-        return wut;
+    
+    function read() public view returns (uint256, uint256) {
+        uint256 wutInvestor; bool hazInvestor; uint256 wutAO; bool hazAO;
+        (wutInvestor, hazInvestor, wutAO, hazAO) = peek();
+        require(hazInvestor && hazAO, "haz-not");
+        return (wutInvestor, wutAO);
     }
-    function poke(bytes32 wut) public note auth {
-        val = wut;
-        has = true;
+    
+    function poke(uint256 wut, uint256 wutAO) public note auth {
+        investorRewardRate = wut;
+        aoRewardRate = wutAO;
+        hasInvestorRewardRate = true;
+        hasAORewardRate = true;
     }
-    function void() public note auth {  // unset the value
-        has = false;
+
+    function void() public note auth {
+        hasInvestorRewardRate = false;
+        hasAORewardRate = false;
     }
+
 }
